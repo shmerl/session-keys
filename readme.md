@@ -1,7 +1,7 @@
 # Session keys
 
 Session keys is a plugin for Neovim that allows creating temporary key mappings that you can enable on demand
-for a specific need (staring keys session) and then disable them when not needed anymore (stopping keys session),
+for a specific need (starting keys session) and then disable them when not needed anymore (stopping keys session),
 which restores mappings to their original state.
 
 This way you can define a number of sessions for different needs without worrying about reusing keys.
@@ -16,15 +16,18 @@ With lazy.nvim:
 
 ## Usage
 
-You need to set up your session keys by adding mappings to `sessions` table which you can access it through
+You need to set up your session keys by adding mappings to `sessions` table which you can access through
 `require('session-keys').sessions`.
 
 Give your session a name and then assign mappings per mode. See a detailed example below.
 
-Usage of mode, rhs, lhs and opts is the same as described in `:help nvim_set_keymap`. See also `:help key-notation`.
+Usage of mode, rhs, lhs and opts is the same as described in `:help nvim_set_keymap`.
+
+See also `:help key-notation`.
 
 ## Example of setting up DAP debugging session keys for Neovim + Konsole
 
+```
 F5          - run, continue
 F9          - toggle breakpoint
 F10         - step over
@@ -39,15 +42,18 @@ Shift + F5  - run last
 F7          - pause thread
 Ctrl + F5   - reverse continue
 Shift + F10 - step back
+```
 
 **Note**: in Konsole, function keys with modifiers result in keycodes that neovim understands as higher function keys
   such as F17, F22 and etc., so those are used below:
 
-  Shift + F5  = F17
-  Ctrl + F5   = F29
-  Shift + F8  = F20
-  Shift + F11 = F23
-  Shift + F10 = F22
+```
+Shift + F5  = F17
+Ctrl + F5   = F29
+Shift + F8  = F20
+Shift + F11 = F23
+Shift + F10 = F22
+```
 
   For details on how to determine it, see: https://github.com/neovim/neovim/issues/7384
 
@@ -90,7 +96,7 @@ This will restore your key mappings to what they were before you started the ses
 
 You can define and start multiple sessions. To see the list of currently active sessions:
 
-```
+```vim
 :lua require('session-keys'):show_active()
 ```
 
