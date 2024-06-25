@@ -65,24 +65,23 @@ nvim -V3log
 ```
 
 ```lua
-local dap = require('dap')
-
+-- using require('dap') in the callback instead of a local variable to allow lazy loading of DAP plugin even after session is already defined
 require('session-keys').sessions.dap = {
    n = { -- table for mode 'n'
-     { lhs = '<F5>',  rhs = '', opts = { callback = function() dap.continue() end, nowait = true, noremap = true } },
-     { lhs = '<F9>',  rhs = '', opts = { callback = function() dap.toggle_breakpoint() end, nowait = true, noremap = true } },
-     { lhs = '<F10>', rhs = '', opts = { callback = function() dap.step_over() end, nowait = true, noremap = true } },
-     { lhs = '<F11>', rhs = '', opts = { callback = function() dap.step_into() end, nowait = true, noremap = true } },
-     { lhs = '<F23>', rhs = '', opts = { callback = function() dap.step_out() end, nowait = true, noremap = true } },
+     { lhs = '<F5>',  rhs = '', opts = { callback = function() require('dap').continue() end, nowait = true, noremap = true } },
+     { lhs = '<F9>',  rhs = '', opts = { callback = function() require('dap').toggle_breakpoint() end, nowait = true, noremap = true } },
+     { lhs = '<F10>', rhs = '', opts = { callback = function() require('dap').step_over() end, nowait = true, noremap = true } },
+     { lhs = '<F11>', rhs = '', opts = { callback = function() require('dap').step_into() end, nowait = true, noremap = true } },
+     { lhs = '<F23>', rhs = '', opts = { callback = function() require('dap').step_out() end, nowait = true, noremap = true } },
 
-     { lhs = '<F8>',  rhs = '', opts = { callback = function() dap.disconnect() end, nowait = true, noremap = true } },
-     { lhs = '<F20>', rhs = '', opts = { callback = function() dap.terminate() end, nowait = true, noremap = true } },
+     { lhs = '<F8>',  rhs = '', opts = { callback = function() require('dap').disconnect() end, nowait = true, noremap = true } },
+     { lhs = '<F20>', rhs = '', opts = { callback = function() require('dap').terminate() end, nowait = true, noremap = true } },
 
-     { lhs = '<F17>', rhs = '', opts = { callback = function() dap.run_last() end, nowait = true, noremap = true } },
+     { lhs = '<F17>', rhs = '', opts = { callback = function() require('dap').run_last() end, nowait = true, noremap = true } },
 
-     { lhs = '<F7>',  rhs = '', opts = { callback = function() dap.pause() end, nowait = true, noremap = true } },
-     { lhs = '<F29>', rhs = '', opts = { callback = function() dap.reverse_continue() end, nowait = true, noremap = true } },
-     { lhs = '<F22>', rhs = '', opts = { callback = function() dap.step_back() end, nowait = true, noremap = true } }
+     { lhs = '<F7>',  rhs = '', opts = { callback = function() require('dap').pause() end, nowait = true, noremap = true } },
+     { lhs = '<F29>', rhs = '', opts = { callback = function() require('dap').reverse_continue() end, nowait = true, noremap = true } },
+     { lhs = '<F22>', rhs = '', opts = { callback = function() require('dap').step_back() end, nowait = true, noremap = true } }
    }
 }
 ```
