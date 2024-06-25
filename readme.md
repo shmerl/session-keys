@@ -21,11 +21,34 @@ You need to set up your session keys by adding mappings to `sessions` table whic
 
 Give your session a name and then assign mappings per mode. See a detailed example below.
 
-Usage of mode, rhs, lhs and opts is the same as described in `:help nvim_set_keymap`.
+Usage of mode, rhs, lhs (and opts if any) is the same as described in `:help vim.keymap.set`.
 
 See also `:help key-notation`.
 
 ## Example of setting up DAP debugging session keys for Neovim + Konsole
+
+```lua
+session_keys.sessions.dap = {
+   n = { -- mode 'n'
+     { lhs = '<F5>',  rhs = function() require('dap').continue() end },
+     { lhs = '<F9>',  rhs = function() require('dap').toggle_breakpoint() end },
+     { lhs = '<F10>', rhs = function() require('dap').step_over() end },
+     { lhs = '<F11>', rhs = function() require('dap').step_into() end },
+     { lhs = '<F23>', rhs = function() require('dap').step_out() end },
+
+     { lhs = '<F8>',  rhs = function() require('dap').disconnect() end },
+     { lhs = '<F20>', rhs = function() require('dap').terminate() end },
+
+     { lhs = '<F17>', rhs = function() require('dap').run_last() end },
+
+     { lhs = '<F7>',  rhs = function() require('dap').pause() end },
+     { lhs = '<F29>', rhs = function() require('dap').reverse_continue() end },
+     { lhs = '<F22>', rhs = function() require('dap').step_back() end }
+   }
+}
+```
+
+Explanation:
 
 ```
 F5          - run, continue
@@ -62,28 +85,6 @@ Shift + F10 = F22
 ```
 nvim -V3log
 :q
-```
-
-```lua
--- using require('dap') in the callback instead of a local variable to allow lazy loading of DAP plugin even after session is already defined
-require('session-keys').sessions.dap = {
-   n = { -- table for mode 'n'
-     { lhs = '<F5>',  rhs = '', opts = { callback = function() require('dap').continue() end, nowait = true, noremap = true } },
-     { lhs = '<F9>',  rhs = '', opts = { callback = function() require('dap').toggle_breakpoint() end, nowait = true, noremap = true } },
-     { lhs = '<F10>', rhs = '', opts = { callback = function() require('dap').step_over() end, nowait = true, noremap = true } },
-     { lhs = '<F11>', rhs = '', opts = { callback = function() require('dap').step_into() end, nowait = true, noremap = true } },
-     { lhs = '<F23>', rhs = '', opts = { callback = function() require('dap').step_out() end, nowait = true, noremap = true } },
-
-     { lhs = '<F8>',  rhs = '', opts = { callback = function() require('dap').disconnect() end, nowait = true, noremap = true } },
-     { lhs = '<F20>', rhs = '', opts = { callback = function() require('dap').terminate() end, nowait = true, noremap = true } },
-
-     { lhs = '<F17>', rhs = '', opts = { callback = function() require('dap').run_last() end, nowait = true, noremap = true } },
-
-     { lhs = '<F7>',  rhs = '', opts = { callback = function() require('dap').pause() end, nowait = true, noremap = true } },
-     { lhs = '<F29>', rhs = '', opts = { callback = function() require('dap').reverse_continue() end, nowait = true, noremap = true } },
-     { lhs = '<F22>', rhs = '', opts = { callback = function() require('dap').step_back() end, nowait = true, noremap = true } }
-   }
-}
 ```
 
 Once you enabled this set up, you can start your named session (in this case `dap`) as follows:

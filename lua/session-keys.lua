@@ -44,7 +44,7 @@ function SessionKeys:start(session_name)
 
    for mode, mode_mappings in pairs(session_mappings) do
       for _, mode_mapping in pairs(mode_mappings) do
-         vim.api.nvim_set_keymap(mode, mode_mapping.lhs, mode_mapping.rhs, mode_mapping.opts)
+         vim.keymap.set(mode, mode_mapping.lhs, mode_mapping.rhs, mode_mapping.opts)
       end
    end
 end
