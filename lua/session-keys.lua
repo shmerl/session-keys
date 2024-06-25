@@ -4,7 +4,7 @@ local SessionKeys = {
 }
 
 -- returns maparg style mapping if exists
-function get_mapping(mode, lhs)
+local function get_mapping(mode, lhs)
    local mappings = vim.api.nvim_get_keymap(mode)
    for _, val in pairs(mappings) do
       if (lhs == val.lhs) then
@@ -15,6 +15,10 @@ function get_mapping(mode, lhs)
    return nil
 end
 
+local function session_active(self, session_name)
+   return self.backups[session_name] ~= nil
+end
+
 -- TODO: handle session deactivation by disabling them hierarchically i.e. disabling earlier started session should first disable all later ones in reverse order too
 function SessionKeys:start(session_name)
    local session_mappings = self.sessions[session_name]
@@ -23,7 +27,7 @@ function SessionKeys:start(session_name)
       error(string.format("Incorrect keys session %s specified!", session_name))
    end
 
-   if (self.backups[session_name] ~= nil) then
+   if (session_active(self, session_name)) then
       error(string.format("Keys session %s is already active!", session_name))
    end
 
@@ -52,7 +56,7 @@ function SessionKeys:stop(session_name)
       error(string.format("Incorrect keys session %s specified!", session_name))
    end
 
-   if (self.backups[session_name] == nil) then
+   if (not session_active(self, session_name)) then
       error(string.format("Keys session %s is already inactive!", session_name))
    end
 
@@ -61,6 +65,20 @@ function SessionKeys:stop(session_name)
    end
 
    self.backups[session_name] = nil
+end
+
+function SessionKeys:toggle(session_name)
+   local session_mappings = self.sessions[session_name]
+
+   if (session_mappings == nil) then
+      error(string.format("Incorrect keys session %s specified!", session_name))
+   end
+
+   if (session_active(self, session_name)) then
+      self:stop(session_name)
+   else
+      self:start(session_name)
+   end
 end
 
 function SessionKeys:show_active()

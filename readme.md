@@ -101,6 +101,14 @@ Do some debugging using F5, F9 etc. When you are done, stop the session with:
 
 This will restore your key mappings to what they were before you started the session.
 
+To toggle a session back and forth between active and inactive you can do:
+
+```vim
+:lua require('session-keys'):toggle('dap')
+```
+
+Toggle especially can be assigned to its own permanent key mapping for easier control.
+
 You can define and start multiple sessions. To see the list of currently active sessions:
 
 ```vim
