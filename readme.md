@@ -115,7 +115,17 @@ You can define and start multiple sessions. To see the list of currently active 
 :lua require('session-keys'):show_active()
 ```
 
-## Currently not supported
+## Known limitations
+
+### Local buffer mapping
+
+Sessions by nature of being defined without relation to buffers are currently assuming global buffer mappings.
+
+Local buffer mappings scenario isn't supported, so avoid using `buffer` in the opts for keys.
+
+Not sure yet if there is a use case for local buffers, but it could be added in theory if there would be one.
+
+### Session hierarchy
 
 Session hierarchy isn't handled. I.e., if you start a bunch of sessions that conflict with each other and then stop them in the wrong order,
 you'll mess up your mappings until next neovim restart, so make sure to stop sessions in the right sequence to get back to the original state.

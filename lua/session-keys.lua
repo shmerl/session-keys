@@ -33,6 +33,7 @@ function SessionKeys:start(session_name)
 
    self.backups[session_name] = {}
 
+   -- back up original mappings
    for mode, mode_mappings in pairs(session_mappings) do
       for _, mode_mapping in pairs(mode_mappings) do
          local current_mapping = get_mapping(mode, mode_mapping.lhs)
@@ -42,6 +43,7 @@ function SessionKeys:start(session_name)
       end
    end
 
+   -- set custom mappings
    for mode, mode_mappings in pairs(session_mappings) do
       for _, mode_mapping in pairs(mode_mappings) do
          vim.keymap.set(mode, mode_mapping.lhs, mode_mapping.rhs, mode_mapping.opts)
@@ -60,6 +62,16 @@ function SessionKeys:stop(session_name)
       error(string.format("Keys session %s is already inactive!", session_name))
    end
 
+   -- delete custom mappings
+   for mode, mode_mappings in pairs(session_mappings) do
+      for _, mode_mapping in pairs(mode_mappings) do
+         -- passing mode_mapping.opts here, but local buffers aren't going
+         -- to work anyway due to backup only considering global buffer currently
+         vim.keymap.del(mode, mode_mapping.lhs, mode_mapping.opts)
+      end
+   end
+
+   -- restore original mappings
    for _, mapping in pairs(self.backups[session_name]) do
       vim.fn.mapset(mapping)
    end
