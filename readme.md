@@ -69,7 +69,7 @@ Shift + F8  - terminate
 Shift + F5  - run last
 
 F7          - pause thread
-Ctrl + F5   - reverse continue
+Ctrl  + F5  - reverse continue
 Shift + F10 - step back
 ```
 
@@ -78,7 +78,7 @@ Shift + F10 - step back
 
 ```
 Shift + F5  = F17
-Ctrl + F5   = F29
+Ctrl  + F5  = F29
 Shift + F6  = F18
 Shift + F8  = F20
 Shift + F11 = F23
@@ -121,7 +121,7 @@ Toggle especially can be assigned to its own permanent key mapping for easier co
 For example:
 
 ```lua
--- Meta + F11 (= F59) for toggling dap session keys itself
+-- Alt + F11 (= F59) for toggling dap session keys itself
 vim.keymap.set('n', '<F59>', function() require('session-keys'):toggle('dap') end)
 
 ```
