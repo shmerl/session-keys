@@ -30,23 +30,23 @@ See also `:help key-notation`.
 ```lua
 session_keys.sessions.dap = {
    n = { -- mode 'n'
-      { lhs = '<F5>',  rhs = require('dap').continue },
-      { lhs = '<F9>',  rhs = require('dap').toggle_breakpoint },
-      { lhs = '<F10>', rhs = require('dap').step_over },
-      { lhs = '<F11>', rhs = require('dap').step_into },
-      { lhs = '<F23>', rhs = require('dap').step_out },
+      { lhs = '<F5>',  rhs = function() require('dap').continue() end },
+      { lhs = '<F9>',  rhs = function() require('dap').toggle_breakpoint() end },
+      { lhs = '<F10>', rhs = function() require('dap').step_over() end },
+      { lhs = '<F11>', rhs = function() require('dap').step_into() end },
+      { lhs = '<F23>', rhs = function() require('dap').step_out() end },
 
-      { lhs = '<F6>',  rhs = require('dap').down },
-      { lhs = '<F18>', rhs = require('dap').up },
+      { lhs = '<F6>',  rhs = function() require('dap').down() end },
+      { lhs = '<F18>', rhs = function() require('dap').up() end },
 
-      { lhs = '<F8>',  rhs = require('dap').disconnect },
-      { lhs = '<F20>', rhs = require('dap').terminate },
+      { lhs = '<F8>',  rhs = function() require('dap').disconnect() end },
+      { lhs = '<F20>', rhs = function() require('dap').terminate() end },
 
-      { lhs = '<F17>', rhs = require('dap').run_last },
+      { lhs = '<F17>', rhs = function() require('dap').run_last() end },
 
-      { lhs = '<F7>',  rhs = require('dap').pause },
-      { lhs = '<F29>', rhs = require('dap').reverse_continue },
-      { lhs = '<F22>', rhs = require('dap').step_back }
+      { lhs = '<F7>',  rhs = function() require('dap').pause() end },
+      { lhs = '<F29>', rhs = function() require('dap').reverse_continue() end },
+      { lhs = '<F22>', rhs = function() require('dap').step_back() end }
    }
 }
 ```
@@ -72,6 +72,9 @@ F7          - pause thread
 Ctrl  + F5  - reverse continue
 Shift + F10 - step back
 ```
+
+DAP function calls above are wrapped in `function() ... end` to allow lazy loading of DAP plugin if needed.
+If you don't need that, you can simply use something like `rhs = require('dap').continue` for simplicity.
 
 **Note**: in Konsole, function keys with modifiers result in keycodes that neovim understands as higher function keys
   such as F17, F22 and etc., so those are used below:
