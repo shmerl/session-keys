@@ -21,7 +21,8 @@ You need to set up your session keys by adding mappings to `sessions` table whic
 
 Give your session a name and then assign mappings per mode. See a detailed example below.
 
-Usage of mode, rhs, lhs (and opts if any) is the same as described in `:help vim.keymap.set`.
+Usage of mode, rhs, lhs (and opts if any) is the same as described in `:help vim.keymap.set`,
+except that mode (key of the table) has to be a single value, not a list.
 
 See also `:help key-notation`.
 
@@ -77,7 +78,7 @@ DAP function calls above are wrapped in `function() ... end` to allow lazy loadi
 If you don't need that, you can simply use something like `rhs = require('dap').continue` for simplicity.
 
 **Note**: in Konsole, function keys with modifiers result in keycodes that neovim understands as higher function keys
-  such as F17, F22 and etc., so those are used below:
+  such as F17, F22 and etc., so those are used above:
 
 ```
 Shift + F5  = F17
