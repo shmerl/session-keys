@@ -40,8 +40,8 @@ session_keys.sessions.dap = {
       { lhs = '<F6>',  rhs = function() require('dap').down() end },
       { lhs = '<F18>', rhs = function() require('dap').up() end },
 
-      { lhs = '<F8>',  rhs = function() require('dap').disconnect() end },
-      { lhs = '<F20>', rhs = function() require('dap').terminate() end },
+      { lhs = '<F8>',  rhs = function() require('dap').terminate() end },
+      { lhs = '<F20>', rhs = function() require('dap').disconnect({ terminateDebuggee = false }) end },
 
       { lhs = '<F17>', rhs = function() require('dap').run_last() end },
 
@@ -64,8 +64,8 @@ Shift + F11 - step out
 F6          - go down in current stacktrace without stepping
 Shift + F6  - go up in current stacktrace without stepping
 
-F8          - disconnect
-Shift + F8  - terminate
+F8          - terminate
+Shift + F8  - disconnect
 
 Shift + F5  - run last
 
