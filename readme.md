@@ -29,7 +29,7 @@ See also `:help key-notation`.
 ### Example of setting up DAP debugging session keys for Neovim + Konsole
 
 ```lua
-session_keys.sessions.dap = {
+require('session-keys').sessions.dap = {
    n = { -- mode 'n'
       { lhs = '<F5>',  rhs = function() require('dap').continue() end },
       { lhs = '<F9>',  rhs = function() require('dap').toggle_breakpoint() end },
