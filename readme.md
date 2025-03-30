@@ -32,22 +32,22 @@ See also `:help key-notation`.
 require('session-keys').sessions.dap = {
    n = { -- mode 'n'
       { lhs = '<F5>',  rhs = function() require('dap').continue() end },
+      { lhs = '<F17>', rhs = function() require('dap').run_to_cursor() end },
       { lhs = '<F9>',  rhs = function() require('dap').toggle_breakpoint() end },
       { lhs = '<F10>', rhs = function() require('dap').step_over() end },
       { lhs = '<F11>', rhs = function() require('dap').step_into() end },
       { lhs = '<F23>', rhs = function() require('dap').step_out() end },
 
+      { lhs = '<F8>',  rhs = function() require('dap').terminate() end },
+      { lhs = '<F20>', rhs = function() require('dap').disconnect({ terminateDebuggee = false }) end },
+      { lhs = '<F29>', rhs = function() require('dap').run_last() end },
+
       { lhs = '<F6>',  rhs = function() require('dap').down() end },
       { lhs = '<F18>', rhs = function() require('dap').up() end },
 
-      { lhs = '<F8>',  rhs = function() require('dap').terminate() end },
-      { lhs = '<F20>', rhs = function() require('dap').disconnect({ terminateDebuggee = false }) end },
-
-      { lhs = '<F53>', rhs = function() require('dap').run_to_cursor() end },
-      { lhs = '<F17>', rhs = function() require('dap').run_last() end },
-
       { lhs = '<F7>',  rhs = function() require('dap').pause() end },
-      { lhs = '<F29>', rhs = function() require('dap').reverse_continue() end },
+
+      { lhs = '<F41>', rhs = function() require('dap').reverse_continue() end },
       { lhs = '<F22>', rhs = function() require('dap').step_back() end }
    }
 }
@@ -57,23 +57,23 @@ Explanation:
 
 ```
 F5          - run, continue
+Shift + F5  - run to cursor
 F9          - toggle breakpoint
 F10         - step over
 F11         - step into      
 Shift + F11 - step out
 
+F8          - terminate
+Shift + F8  - disconnect
+Ctrl  + F5  - run last
+
 F6          - go down in current stacktrace without stepping
 Shift + F6  - go up in current stacktrace without stepping
 
-F8          - terminate
-Shift + F8  - disconnect
-
-Alt   + F5  - run to cursor
-Shift + F5  - run last
-
 F7          - pause thread
-Ctrl  + F5  - reverse continue
-Shift + F10 - step back
+
+Ctrl + Shift + F5 - reverse continue
+Shift + F10       - step back
 ```
 
 DAP function calls above are wrapped in `function() ... end` to allow lazy loading of DAP plugin if needed.
@@ -83,13 +83,14 @@ If you don't need that, you can simply use something like `rhs = require('dap').
   such as F17, F22 and etc., so those are used above:
 
 ```
-Shift + F5  = F17
-Ctrl  + F5  = F29
-Alt   + F5  = F53
-Shift + F6  = F18
-Shift + F8  = F20
-Shift + F11 = F23
-Shift + F10 = F22
+Shift + F5        = F17
+Ctrl + F5         = F29
+Ctrl + Shift + F5 = F41
+Shift + F6        = F18
+Shift + F8        = F20
+Shift + F11       = F23
+Shift + F10       = F22
+
 ```
 
 To check the combo codes, try for example:
