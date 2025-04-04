@@ -31,24 +31,24 @@ See also `:help key-notation`.
 ```lua
 require('session-keys').sessions.dap = {
    n = { -- mode 'n'
-      { lhs = '<F5>',  rhs = function() require('dap').continue() end },
-      { lhs = '<F17>', rhs = function() require('dap').run_to_cursor() end },
-      { lhs = '<F9>',  rhs = function() require('dap').toggle_breakpoint() end },
-      { lhs = '<F10>', rhs = function() require('dap').step_over() end },
-      { lhs = '<F11>', rhs = function() require('dap').step_into() end },
-      { lhs = '<F23>', rhs = function() require('dap').step_out() end },
+      { lhs = '<F5>',  rhs = function() require('dap').continue() end, opts = { desc = 'Run, continue' } },
+      { lhs = '<F17>', rhs = function() require('dap').run_to_cursor() end, opts = { desc = 'Run to cursor' } },
+      { lhs = '<F9>',  rhs = function() require('dap').toggle_breakpoint() end, opts = { desc = 'Toggle breakpoint' } },
+      { lhs = '<F10>', rhs = function() require('dap').step_over() end, opts = { desc = 'Step over' } },
+      { lhs = '<F11>', rhs = function() require('dap').step_into() end, opts = { desc = 'Step into' } },
+      { lhs = '<F23>', rhs = function() require('dap').step_out() end, opts = { desc = 'Step out' } },
 
-      { lhs = '<F8>',  rhs = function() require('dap').terminate() end },
-      { lhs = '<F20>', rhs = function() require('dap').disconnect({ terminateDebuggee = false }) end },
-      { lhs = '<F29>', rhs = function() require('dap').run_last() end },
+      { lhs = '<F8>',  rhs = function() require('dap').terminate() end, opts = { desc = 'Terminate' } },
+      { lhs = '<F20>', rhs = function() require('dap').disconnect({ terminateDebuggee = false }) end, opts = { desc = 'Disconnect' } },
+      { lhs = '<F29>', rhs = function() require('dap').run_last() end, opts = { desc = 'Run last' } },
 
-      { lhs = '<F6>',  rhs = function() require('dap').down() end },
-      { lhs = '<F18>', rhs = function() require('dap').up() end },
+      { lhs = '<F6>',  rhs = function() require('dap').down() end, opts = { desc = 'Go down in current stacktrace without stepping' } },
+      { lhs = '<F18>', rhs = function() require('dap').up() end, opts = { desc = 'Go up in current stacktrace without stepping' } },
 
-      { lhs = '<F7>',  rhs = function() require('dap').pause() end },
+      { lhs = '<F7>',  rhs = function() require('dap').pause() end, opts = { desc = 'Pause thread' } },
 
-      { lhs = '<F41>', rhs = function() require('dap').reverse_continue() end },
-      { lhs = '<F22>', rhs = function() require('dap').step_back() end }
+      { lhs = '<F41>', rhs = function() require('dap').reverse_continue() end, opts = { desc = 'Reverse continue' } },
+      { lhs = '<F22>', rhs = function() require('dap').step_back() end, opts = { desc = 'Step back' } }
    }
 }
 ```
@@ -60,7 +60,7 @@ F5        - run, continue
 Shift-F5  - run to cursor
 F9        - toggle breakpoint
 F10       - step over
-F11       - step into      
+F11       - step into
 Shift-F11 - step out
 
 F8       - terminate
